@@ -11,13 +11,8 @@
   background-color: #fff;
   border-radius: 24px;
   border-style: none;
-  box-shadow: #5b42f3 0 1px 1px -1px, #5b42f3 0 1px 5px 0,
-    #5b42f3 0 1px 8px 0;
-  box-sizing: border-box;
+  box-shadow: #5b42f3 0 1px 1px -1px, #5b42f3 0 1px 5px 0, #5b42f3 0 1px 8px 0;
   color: #5b42f3;
-  cursor: pointer;
-  display: inline-flex;
-  will-change: transform, opacity;
 
   &__icon {
     margin-right: 8px;
@@ -35,15 +30,14 @@
     border: 0;
     border-radius: 8px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 5px 10px -5px;
-    box-sizing: border-box;
     color: #ffffff;
-    cursor: pointer;
   }
 
   &__nav-icon {
     font-size: 16px;
     margin-left: 20px;
     color: #5b42f3;
+    
   }
 
   &__displayed-month {
