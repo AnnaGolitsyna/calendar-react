@@ -7,7 +7,6 @@
 
 .create-event-btn {
   padding: 0 16px;
-  align-items: center;
   background-color: #fff;
   border-radius: 24px;
   border-style: none;
@@ -37,10 +36,11 @@
     font-size: 16px;
     margin-left: 20px;
     color: #5b42f3;
-    
   }
 
   &__displayed-month {
     margin-left: 10px;
+    font-size: 20px;
+    color: #5b42f3;
   }
 }
