@@ -8,31 +8,32 @@ const Navigation = ({ weekDates }) => {
   return (
     <header className="calendar__header">
       {weekDates.map((dayDate) => {
-        
-        if (moment(dayDate).format('L') === moment(Date.now()).format('L')) {
-          return (
-            <div
-              className="calendar__day-today calendar__day-label day-label"
-              key={dayDate.getTime()}
-            >
-              <span className="day-label__day-name" style={{ color: 'blue' }}>
-                {days[dayDate.getDay()]}
-              </span>
-              <span className="day-label__day-number day-label__today">
-                {dayDate.getDate()}
-              </span>
-            </div>
-          );
-        }
+        const isToday =
+          moment(dayDate).format('L') === moment(Date.now()).format('L');
+
         return (
           <div
             className="calendar__day-label day-label"
             key={dayDate.getTime()}
           >
-            <span className="day-label__day-name">
+            <span
+              className={
+                isToday
+                  ? 'day-label__day-name day-label__day-name_today'
+                  : 'day-label__day-name'
+              }
+            >
               {days[dayDate.getDay()]}
             </span>
-            <span className="day-label__day-number">{dayDate.getDate()}</span>
+            <span
+              className={
+                isToday
+                  ? 'day-label__day-number day-label__day-number_today'
+                  : 'day-label__day-number'
+              }
+            >
+              {dayDate.getDate()}
+            </span>
           </div>
         );
       })}
