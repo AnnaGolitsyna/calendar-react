@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import './modal.scss';
 
 const Modal = ({ onHideForm, onCreateEvent }) => {
-  // fill in the form - submit +++
-  // save stateValue in stateModal +++
-  // send stateValue to Main +++
-  // add task to gateWay/events.js +++
+
   const [{ id, title, description, date, startTime, endTime }, setFormData] =
     useState({
       id: Math.random(),
       title: '',
       description: '',
-      date: '',
-      startTime: '',
-      endTime: '',
+      date: moment(new Date()).format('YYYY-MM-DD'),
+      startTime: moment(new Date()).locale('ru').format('LT'),
+      endTime: moment(new Date()).locale('ru').format('LT'),
     });
 
   const handleChange = (e) => {
@@ -33,6 +31,7 @@ const Modal = ({ onHideForm, onCreateEvent }) => {
     onCreateEvent({ id, title, description, dateFrom, dateTo });
   };
 
+  
   return (
     <div className="modal overlay">
       <div className="modal__content">
