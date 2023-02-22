@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import './modal.scss';
 
-const Modal = ({ onHideForm, onCreateEvent }) => {
-
+const Modal = ({ onHideForm, onCreateEvent, dateEvent, startTimeEvent }) => {
   const [{ id, title, description, date, startTime, endTime }, setFormData] =
     useState({
       id: Math.random(),
       title: '',
       description: '',
-      date: moment(new Date()).format('YYYY-MM-DD'),
-      startTime: moment(new Date()).locale('ru').format('LT'),
-      endTime: moment(new Date()).locale('ru').format('LT'),
+      date: moment(dateEvent).format('YYYY-MM-DD'),
+      startTime: moment(startTimeEvent).format('HH:mm'),
+      endTime: moment(startTimeEvent).format('HH:mm'),
     });
+
+  // console.log(startTimeEvent);
+  // console.log(startTime);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +33,6 @@ const Modal = ({ onHideForm, onCreateEvent }) => {
     onCreateEvent({ id, title, description, dateFrom, dateTo });
   };
 
-  
   return (
     <div className="modal overlay">
       <div className="modal__content">

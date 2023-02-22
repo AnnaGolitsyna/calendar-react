@@ -72,7 +72,12 @@ const Header = ({
         </div>
       </header>
       {isModal && (
-        <Modal onHideForm={hideModul} onCreateEvent={onCreateEvent} />
+        <Modal
+          dateEvent={new Date()}
+          startTimeEvent={new Date()}
+          onHideForm={hideModul}
+          onCreateEvent={onCreateEvent}
+        />
       )}
     </>
   );

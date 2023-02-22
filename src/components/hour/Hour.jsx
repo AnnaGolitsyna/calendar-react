@@ -1,26 +1,17 @@
 import React, {useState} from 'react';
 import Event from '../event/Event';
-import Modal from '../modal/Modal';
+
 import { formatMins } from '../../../src/utils/dateUtils.js';
 
-const Hour = ({ dataHour, hourEvents, onDeleteEvent, onCreateEvent }) => {
-    const [isModal, setModal] = useState(false);
+const Hour = ({ dataHour, hourEvents, onDeleteEvent,  }) => {
 
-    const showModal = (e) => {
-      console.log(e, dataHour, hourEvents);
-      setModal(true);
-    };
-
-    const hideModul = () => {
-      setModal(false);
-    };
 
   return (
-    <>
+
       <div
         className="calendar__time-slot"
         data-time={dataHour + 1}
-        onClick={showModal}
+
       >
         {/* if no events in the current hour nothing will render here */}
         {hourEvents.map(({ id, dateFrom, dateTo, title }) => {
@@ -46,10 +37,6 @@ const Hour = ({ dataHour, hourEvents, onDeleteEvent, onCreateEvent }) => {
           );
         })}
       </div>
-      {isModal && (
-        <Modal onHideForm={hideModul} onCreateEvent={onCreateEvent} />
-      )}
-    </>
   );
 };
 
