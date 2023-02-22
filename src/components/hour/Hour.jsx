@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Event from '../event/Event';
 import Modal from '../modal/Modal';
+import CurrentTime from '../currentTime/CurrentTime';
+import moment from 'moment';
 
 import { formatMins } from '../../../src/utils/dateUtils.js';
 
@@ -28,9 +30,27 @@ const Hour = ({
     });
   };
 
+ 
   const hideModul = () => {
     setModal(false);
   };
+
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000 * 60);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [currentTime]);
+
+  const isCurrentTime =
+    moment(dataDay).format('L') === moment(currentTime).format('L') &&
+    dataHour === currentTime.getHours();
+
+  const currentMinute = currentTime.getMinutes();
 
   return (
     <>
@@ -62,6 +82,7 @@ const Hour = ({
             />
           );
         })}
+        {isCurrentTime && <CurrentTime marginTop={currentMinute} />}
       </div>
       {isModal && (
         <Modal

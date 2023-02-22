@@ -7,6 +7,7 @@ import Sidebar from '../sidebar/Sidebar';
 
 import './calendar.scss';
 
+
 const Calendar = ({ weekDates, events, onDeleteEvent, onCreateEvent }) => {
   // const [eventsInState, setEvents] = useState(events);
 
@@ -22,6 +23,7 @@ const Calendar = ({ weekDates, events, onDeleteEvent, onCreateEvent }) => {
             onDeleteEvent={onDeleteEvent}
             onCreateEvent={onCreateEvent}
           />
+
         </div>
       </div>
     </section>
