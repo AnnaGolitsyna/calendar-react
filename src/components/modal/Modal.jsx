@@ -20,7 +20,13 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, startTimeEvent }) => {
     const { name, value } = e.target;
 
     setFormData((prevState) => {
-      return { ...prevState, [name]: value };
+      const nextState = { ...prevState, [name]: value };
+      const { startTime, endTime } = nextState;
+      if (endTime.substring(0, 2) - startTime.substring(0, 2) > 6) {
+        alert('The event cannot last more then 6 hours');
+        return prevState;
+      }
+      return nextState;
     });
   };
 

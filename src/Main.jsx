@@ -39,11 +39,6 @@ const Main = () => {
   const handleDeleteEvent = (eventId) => {
     setEvents((prevState) => prevState.filter(({ id }) => id !== eventId));
   };
-  // create onClick in events +++
-  // create formDelete => open after onClick in events
-  // create onClick in formDelete
-  // send onClick(data) to Main +++
-  // update setEvents - delete data +++
 
   return (
     <>
