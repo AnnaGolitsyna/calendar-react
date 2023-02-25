@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import './modal.scss';
+import { getArrOfInvalidEventMessages } from './validation';
 
 const Modal = ({ onHideForm, onCreateEvent, dateEvent, startTimeEvent }) => {
   const [{ id, title, description, date, startTime, endTime }, setFormData] =
@@ -13,19 +14,11 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, startTimeEvent }) => {
       endTime: moment(startTimeEvent).format('HH:mm'),
     });
 
-  // console.log(startTimeEvent);
-  // console.log(startTime);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     setFormData((prevState) => {
       const nextState = { ...prevState, [name]: value };
-      const { startTime, endTime } = nextState;
-      if (endTime.substring(0, 2) - startTime.substring(0, 2) > 6) {
-        alert('The event cannot last more then 6 hours');
-        return prevState;
-      }
       return nextState;
     });
   };
@@ -36,7 +29,14 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, startTimeEvent }) => {
     const dateFrom = new Date(`${date} ${startTime}`);
     const dateTo = new Date(`${date} ${endTime}`);
 
-    onCreateEvent({ id, title, description, dateFrom, dateTo });
+    const isValidForm =
+      getArrOfInvalidEventMessages(dateFrom, dateTo).length === 0;
+
+    if (!isValidForm) {
+      alert(getArrOfInvalidEventMessages(dateFrom, dateTo));
+    } else {
+      onCreateEvent({ id, title, description, dateFrom, dateTo });
+    }
   };
 
   return (
@@ -95,51 +95,5 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, startTimeEvent }) => {
     </div>
   );
 };
-
-// class Modal extends Component {
-//   render() {
-//     console.log(this.props);
-//     return (
-//       <div className="modal overlay">
-//         <div className="modal__content">
-//           <div className="create-event">
-//             <button className="create-event__close-btn">+</button>
-//             <form className="event-form">
-//               <input
-//                 type="text"
-//                 name="title"
-//                 placeholder="Title"
-//                 className="event-form__field"
-//               />
-//               <div className="event-form__time">
-//                 <input type="date" name="date" className="event-form__field" />
-//                 <input
-//                   type="time"
-//                   name="startTime"
-//                   className="event-form__field"
-//                   onChange={this.handleChange}
-//                 />
-//                 <span>-</span>
-//                 <input
-//                   type="time"
-//                   name="endTime"
-//                   className="event-form__field"
-//                 />
-//               </div>
-//               <textarea
-//                 name="description"
-//                 placeholder="Description"
-//                 className="event-form__field"
-//               ></textarea>
-//               <button type="submit" className="event-form__submit-btn">
-//                 Create
-//               </button>
-//             </form>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
 
 export default Modal;

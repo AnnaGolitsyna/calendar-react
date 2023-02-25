@@ -3,8 +3,8 @@ const events = [
     id: 1,
     title: 'Go to the gym',
     description: 'some text here',
-    dateFrom: new Date(2023, 1, 15, 10, 15),
-    dateTo: new Date(2023, 1, 15, 15, 0),
+    dateFrom: new Date(2023, 1, 26, 10, 15),
+    dateTo: new Date(2023, 1, 26, 15, 0),
   },
   {
     id: 2,
@@ -17,15 +17,15 @@ const events = [
     id: 3,
     title: 'Lunch',
     description: '',
-    dateFrom: new Date(2023, 1, 17, 10, 30),
-    dateTo: new Date(2023, 1, 17, 11, 30),
+    dateFrom: new Date(2023, 1, 25, 10, 30),
+    dateTo: new Date(2023, 1, 25, 11, 30),
   },
   {
     id: 4,
     title: 'Meet friend',
     description: 'at the cafe',
-    dateFrom: new Date(2023, 1, 25, 10, 30),
-    dateTo: new Date(2023, 1, 25, 11, 0),
+    dateFrom: new Date(2023, 1, 26, 18, 30),
+    dateTo: new Date(2023, 1, 26, 20, 0),
   },
 ];
 
