@@ -16,11 +16,7 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, startTimeEvent }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setFormData((prevState) => {
-      const nextState = { ...prevState, [name]: value };
-      return nextState;
-    });
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = (event) => {
