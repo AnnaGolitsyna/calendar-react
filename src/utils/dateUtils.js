@@ -26,23 +26,29 @@ export const getDateTime = (date, time) => {
   return withMinutes;
 };
 
+export const getFormattedTime = (hours, minutes) => {
+  const multiplesOf15Min = Math.floor(minutes / 15) * 15;
+  const formattedMin = multiplesOf15Min < 10 ? `00` : `${multiplesOf15Min}`;
+  return `${hours}:${formattedMin}`;
+};
+
 
 export const formatMins = (mins) => {
   return mins < 10 ? `0${mins}` : mins;
 };
 
 export const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-export const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+// export const months = [
+//   'January',
+//   'February',
+//   'March',
+//   'April',
+//   'May',
+//   'June',
+//   'July',
+//   'August',
+//   'September',
+//   'October',
+//   'November',
+//   'December',
+// ];

@@ -2,21 +2,30 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import './modal.scss';
 import { getArrOfInvalidEventMessages } from './validation';
+import { getFormattedTime } from '../../../src/utils/dateUtils.js';
 
-const Modal = ({ onHideForm, onCreateEvent, dateEvent, startTimeEvent }) => {
+
+const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent }) => {
   const [{ id, title, description, date, startTime, endTime }, setFormData] =
     useState({
       id: Math.random(),
       title: '',
       description: '',
       date: moment(dateEvent).format('YYYY-MM-DD'),
-      startTime: moment(startTimeEvent).format('HH:mm'),
-      endTime: moment(startTimeEvent).format('HH:mm'),
+      startTime: moment(endTimeEvent).format('HH:mm'),
+      endTime: moment(endTimeEvent).format('HH:mm'),
     });
 
+
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
+    const { name, value, type } = e.target;
+    const [hours, minutes] = e.target.value.split(':');
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: type === 'time' ? getFormattedTime(hours, minutes) : value,
+    }));
   };
 
   const handleSubmit = (event) => {

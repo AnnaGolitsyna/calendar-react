@@ -25,12 +25,12 @@ const Hour = ({
       const newDate = new Date(prevState);
       const msInHour = 3600000;
       return newDate.setTime(
-        dataDay.getTime() + (e.target.dataset.time - 1) * msInHour
+        dataDay.getTime() + (e.target.dataset.time) * msInHour
       );
     });
   };
 
- 
+
   const hideModul = () => {
     setModal(false);
   };
@@ -87,7 +87,7 @@ const Hour = ({
       {isModal && (
         <Modal
           dateEvent={dataDay}
-          startTimeEvent={dataDayTime}
+          endTimeEvent={dataDayTime}
           onHideForm={hideModul}
           onCreateEvent={onCreateEvent}
         />

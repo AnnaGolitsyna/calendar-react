@@ -31,17 +31,18 @@ export const getArrOfInvalidEventMessages = (dateFrom, dateTo) => {
 
   const validations = [
     {
-      name: 'oneDay',
-      invalid: dateTo.getDate() - dateFrom.getDate() > 0,
+      invalid: moment(dateFrom).format('l') !== moment(dateTo).format('l'),
       errorText: 'The event must start and end within one day',
     },
     {
-      name: 'over6Hours',
+      invalid: dateFrom.getHours() > dateTo.getHours(),
+      errorText: 'The event start date cannot be greater than end date',
+    },
+    {
       invalid: dateTo.getHours() - dateFrom.getHours() > 6,
       errorText: 'The event cannot be longer then 6 hours',
     },
     {
-      name: 'eventAlreadyExists',
       invalid: checkEventByTime,
       errorText: 'There is already an event at this time',
     },

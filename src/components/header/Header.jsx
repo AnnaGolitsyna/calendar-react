@@ -74,7 +74,7 @@ const Header = ({
       {isModal && (
         <Modal
           dateEvent={new Date()}
-          startTimeEvent={new Date()}
+          endtTimeEvent={new Date()}
           onHideForm={hideModul}
           onCreateEvent={onCreateEvent}
         />

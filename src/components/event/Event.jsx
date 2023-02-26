@@ -23,6 +23,7 @@ const Event = ({
   const handleDeleteEvent = () => {
     if (isNotDelete) {
       alert("You can't delete this event. To late.");
+      return null;
     }
     setDelete(true);
     return id;
