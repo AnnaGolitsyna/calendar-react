@@ -16,8 +16,6 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent }) => {
       endTime: moment(endTimeEvent).format('HH:mm'),
     });
 
-
-
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     const [hours, minutes] = e.target.value.split(':');

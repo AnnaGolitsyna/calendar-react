@@ -36,6 +36,15 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: './src/index.html',
       }),
+      new CopyPlugin({
+        patterns: [
+          { from: '_redirects', to: '' },
+          {
+            from: 'source/url/to/images/folder',
+            to: 'dest/url/to/images/folder',
+          },
+        ],
+      }),
     ],
     devServer: {
       historyApiFallback: true,
@@ -53,7 +62,7 @@ module.exports = (env, argv) => {
     config.plugins.push(
       new MiniCssExtractPlugin({
         filename: '[name].css',
-      }),
+      })
     );
   }
 
