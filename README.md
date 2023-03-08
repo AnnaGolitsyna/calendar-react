@@ -2,7 +2,7 @@
 
 ### [Site link](https://remarkable-cannoli-382e31.netlify.app/)
 
-Layout
+Layout personal calendar in React
 
 ### The tech stack is:
 
