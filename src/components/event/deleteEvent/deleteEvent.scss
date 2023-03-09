@@ -4,8 +4,8 @@
   position: absolute;
   right: -50%;
   bottom: -20px;
-  background-color: beige;
-  width: 70%;
+  background-color: #fff;
+ // width: 70%;
   border: 1px solid #5b42f3;
   box-shadow: rgba(151, 65, 252, 0.2) 0 5px 10px -5px;
   border-radius: 4px;
@@ -18,9 +18,9 @@
     border: none;
     cursor: pointer;
     border-radius: 50%;
-    font-size: 12px;
+    font-size: 10px;
     background: transparent;
-    color: rgb(100, 149, 237);
+    color: gray;
   }
 
   &-btn {
@@ -32,12 +32,12 @@
 
     &__icon {
       margin-left: 10px;
-      color: #5b42f3;
+      color: gray;
     }
 
     &__text {
-      margin-left: 10px;
-      color: #5b42f3;
+      margin: 0 10px;
+      color: gray;
       overflow: hidden;
       text-overflow: ellipsis;
     }

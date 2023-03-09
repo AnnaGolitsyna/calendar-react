@@ -26,7 +26,7 @@ const Header = ({
   };
 
   const displayedMonth = weekDates.reduce((acc, month) => {
-    const formatMonth = moment(month).format('MMMM');
+    const formatMonth = moment(month).format('MMMM YYYY');
     if (!acc.includes(formatMonth)) {
       acc.push(formatMonth);
     }

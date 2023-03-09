@@ -4,8 +4,23 @@
   justify-content: center;
   align-items: center;
 
+  &__close-btn {
+    margin-left: auto;
+    transform: rotate(45deg) scale(2);
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    font-size: 11px;
+    color: gray;
+    background: transparent;
+    cursor: pointer;
+  }
+
   &__content {
-    border: 3px solid rgb(100, 149, 237, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border: 3px solid lavender;
     border-radius: 8px;
   }
 }
@@ -16,38 +31,28 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #cccccc45;
+
   z-index: 10;
 }
 
 .create-event {
   display: flex;
   flex-direction: column;
-
-  &__close-btn {
-    margin-left: auto;
-    transform: rotate(45deg) scale(2);
-    outline: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    background: transparent;
-    color: rgb(100, 149, 237);
-  }
 }
 
 .event-form {
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  background-color: rgb(100, 149, 237, 0.1);
+  background-color: lavender;
 
   &__field {
     margin: 8px;
     border-radius: 8px;
-    border: 2px solid rgb(100, 149, 237, 0.3);
+    border: 1px solid rgb(198, 194, 194);
+    &:hover {
+      border: 1px solid lavenderblush;
+    }
   }
 
   &__submit-btn {
@@ -59,5 +64,9 @@
     border: none;
     padding: 8px 16px;
     border-radius: 8px;
+    cursor: pointer;
+    &:hover {
+      border: 1px solid lavenderblush;
+    }
   }
 }

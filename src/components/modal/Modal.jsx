@@ -45,10 +45,10 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent }) => {
   return (
     <div className="modal overlay">
       <div className="modal__content">
+        <button className="modal__close-btn" onClick={onHideForm}>
+          +
+        </button>
         <div className="create-event">
-          <button className="create-event__close-btn" onClick={onHideForm}>
-            +
-          </button>
           <form className="event-form" onSubmit={handleSubmit}>
             <input
               type="text"
