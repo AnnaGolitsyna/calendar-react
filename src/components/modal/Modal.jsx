@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import './modal.scss';
-import { getArrOfInvalidEventMessages } from './validation';
-import { getFormattedTime } from '../../../src/utils/dateUtils.js';
-
+import { getArrOfErrorMessages } from './validation';
+import { getFormattedTime, getDateTime } from '../../../src/utils/dateUtils.js';
 
 const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent }) => {
   const [{ id, title, description, date, startTime, endTime }, setFormData] =
@@ -18,10 +17,10 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent }) => {
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
-    const [hours, minutes] = e.target.value.split(':');
+    const [hours, minutes] = value.split(':');
 
-    setFormData((prevState) => ({
-      ...prevState,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: type === 'time' ? getFormattedTime(hours, minutes) : value,
     }));
   };
@@ -29,14 +28,11 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const dateFrom = new Date(`${date} ${startTime}`);
-    const dateTo = new Date(`${date} ${endTime}`);
+    const dateFrom = getDateTime(date, startTime);
+    const dateTo = getDateTime(date, endTime);
 
-    const isValidForm =
-      getArrOfInvalidEventMessages(dateFrom, dateTo).length === 0;
-
-    if (!isValidForm) {
-      alert(getArrOfInvalidEventMessages(dateFrom, dateTo));
+    if (getArrOfErrorMessages(dateFrom, dateTo).length) {
+      alert(getArrOfErrorMessages(dateFrom, dateTo));
     } else {
       onCreateEvent({ id, title, description, dateFrom, dateTo });
     }

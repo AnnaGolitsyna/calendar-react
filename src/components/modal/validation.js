@@ -24,7 +24,7 @@ const eventsByHoursInDay = (date) => {
   return eventsByHours;
 };
 
-export const getArrOfInvalidEventMessages = (dateFrom, dateTo) => {
+export const getArrOfErrorMessages = (dateFrom, dateTo) => {
   const checkEventByTime = hours
     .slice(moment(dateFrom).format('H') - 1, moment(dateTo).format('H'))
     .some((el) => eventsByHoursInDay(dateFrom).includes(el));
