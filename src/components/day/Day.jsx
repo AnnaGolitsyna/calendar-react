@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Hour from '../hour/Hour';
-
 import './day.scss';
 
 const Day = ({ dataDay, dayEvents, onDeleteEvent, onCreateEvent }) => {

@@ -5,16 +5,17 @@
   right: -50%;
   bottom: -20px;
   background-color: #fff;
- // width: 70%;
-  border: 1px solid #5b42f3;
+  border: 1px solid lavender;
   box-shadow: rgba(151, 65, 252, 0.2) 0 5px 10px -5px;
   border-radius: 4px;
   z-index: 2;
+  &:hover {
+     border: 1px solid #5b42f3;
+  }
 
   &__hide-btn {
     margin-left: auto;
     transform: rotate(45deg) scale(2);
-    // outline: none;
     border: none;
     cursor: pointer;
     border-radius: 50%;

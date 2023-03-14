@@ -1,9 +1,11 @@
 .calendar {
-  // &__header {
-  //   display: flex;
-  //   height: 100px;
-  //   padding-left: 48px;
-  // }
+  &__header {
+    display: flex;
+    height: 100px;
+    padding-left: 48px;
+    border: 2px solid #eee;
+    background: ghostwhite;
+  }
 
   &__day-label {
     flex: 1;

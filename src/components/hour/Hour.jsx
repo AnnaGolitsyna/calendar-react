@@ -3,6 +3,7 @@ import Event from '../event/Event';
 import Modal from '../modal/Modal';
 import CurrentTime from '../currentTime/CurrentTime';
 import moment from 'moment';
+import './hour.scss';
 
 import { formatMins } from '../../../src/utils/dateUtils.js';
 
