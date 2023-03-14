@@ -13,18 +13,6 @@
   background: transparent;
 }
 
-.modal {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &__content {
-    background: #fff;
-    padding: 16px;
-   
-  }
-}
 
 .overlay {
   position: fixed;

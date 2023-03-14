@@ -20,20 +20,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    background: #fff;
+    padding: 16px;
     border: 3px solid lavender;
     border-radius: 8px;
   }
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-
-  z-index: 10;
-}
 
 .create-event {
   display: flex;
