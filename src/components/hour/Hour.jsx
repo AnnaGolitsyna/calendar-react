@@ -13,6 +13,7 @@ const Hour = ({
   hourEvents,
   onDeleteEvent,
   onCreateEvent,
+  events
 }) => {
   const [isModal, setModal] = useState(false);
   const [dataDayTime, setDataDayTime] = useState(dataDay);
@@ -91,6 +92,7 @@ const Hour = ({
           endTimeEvent={dataDayTime}
           onHideForm={hideModul}
           onCreateEvent={onCreateEvent}
+          events={events}
         />
       )}
     </>

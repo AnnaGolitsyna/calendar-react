@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import Modal from '../modal/Modal';
 
 import './header.scss';
-import Modal from '../modal/Modal';
 
 const Header = ({
   weekDates,
@@ -11,21 +11,17 @@ const Header = ({
   onThisWeek,
   onCreateEvent,
 }) => {
-  // create state => isModal: boolean +++
-  // create handler => change state.isModal- onClick Heder/btn Create +++
-  // open/close form - Modal +++
-
-  const [isModal, setModal] = useState(false);
+  const [isShowModal, setStatusModal] = useState(false);
 
   const showModal = () => {
-    setModal(true);
+    setStatusModal(true);
   };
 
-  const hideModul = () => {
-    setModal(false);
+  const hideModal = () => {
+    setStatusModal(false);
   };
 
-  const displayedMonth = weekDates.reduce((acc, month) => {
+  const displayedMonths = weekDates.reduce((acc, month) => {
     const formatMonth = moment(month).format('MMMM YYYY');
     if (!acc.includes(formatMonth)) {
       acc.push(formatMonth);
@@ -65,17 +61,17 @@ const Header = ({
             <i className="fas fa-chevron-right"></i>
           </button>
           <span className="navigation__displayed-month">
-            {displayedMonth.length === 1
-              ? displayedMonth
-              : `${displayedMonth[0]} - ${displayedMonth[1]}`}
+            {displayedMonths.length === 1
+              ? displayedMonths
+              : `${displayedMonths[0]} - ${displayedMonths[1]}`}
           </span>
         </div>
       </header>
-      {isModal && (
+      {isShowModal && (
         <Modal
           dateEvent={new Date()}
           endtTimeEvent={new Date()}
-          onHideForm={hideModul}
+          onHideForm={hideModal}
           onCreateEvent={onCreateEvent}
         />
       )}

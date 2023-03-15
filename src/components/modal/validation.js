@@ -1,11 +1,11 @@
 import moment from 'moment';
-import events from '../../gateway/events';
+// import events from '../../gateway/events';
 
 const hours = Array(24)
   .fill()
   .map((val, index) => (val = index + 1));
 
-const eventsByHoursInDay = (date) => {
+const eventsByHoursInDay = (date, events) => {
   const formatedDate = moment(date).format('L');
 
   const eventsByHours = events
@@ -24,10 +24,10 @@ const eventsByHoursInDay = (date) => {
   return eventsByHours;
 };
 
-export const getArrOfErrorMessages = (dateFrom, dateTo) => {
+export const getArrOfErrorMessages = (dateFrom, dateTo, events) => {
   const checkEventByTime = hours
     .slice(moment(dateFrom).format('H') - 1, moment(dateTo).format('H'))
-    .some((el) => eventsByHoursInDay(dateFrom).includes(el));
+    .some((el) => eventsByHoursInDay(dateFrom, events).includes(el));
 
   const validations = [
     {
@@ -35,11 +35,11 @@ export const getArrOfErrorMessages = (dateFrom, dateTo) => {
       errorText: 'The event must start and end within one day',
     },
     {
-      invalid: dateFrom.getHours() > dateTo.getHours(),
+      invalid: moment(dateFrom).format('H') > moment(dateTo).format('H'),
       errorText: 'The event start date cannot be greater than end date',
     },
     {
-      invalid: dateTo.getHours() - dateFrom.getHours() > 6,
+      invalid: moment(dateTo).format('H') - moment(dateFrom).format('H') > 6,
       errorText: 'The event cannot be longer then 6 hours',
     },
     {

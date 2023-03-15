@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/header/Header.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
-import events from './gateway/events.js';
+import {
+  fetchEventsList,
+  fetchCreateEvent,
+  fetchDeleteEvent,
+} from './gateway/events.js';
 
-import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
+import {
+  getWeekStartDate,
+  generateWeekRange,
+  getFormattedDateForFetch,
+} from '../src/utils/dateUtils.js';
 
 import './common.scss';
 
 const Main = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
+  const [eventsInState, setEvents] = useState([]);
+
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
 
   const changePrevtWeek = () => {
@@ -28,16 +38,29 @@ const Main = () => {
     setWeekStartDate(newStartDay);
   };
 
-  const [eventsInState, setEvents] = useState(events);
-
-  const handleCreateEvents = (data) => {
-    setEvents((prevState) => {
-      return [...prevState, data];
+  const fetchEventForRender = () => {
+    fetchEventsList().then((data) => {
+      const eventsData = data.map(({ dateFrom, dateTo, ...rest }) => {
+        return {
+          ...rest,
+          dateFrom: getFormattedDateForFetch(dateFrom),
+          dateTo: getFormattedDateForFetch(dateTo),
+        };
+      });
+      setEvents(eventsData);
     });
   };
 
+  useEffect(() => {
+    fetchEventForRender();
+  }, []);
+
+  const handleCreateEvents = (data) => {
+    fetchCreateEvent(data).then(() => fetchEventForRender());
+  };
+
   const handleDeleteEvent = (eventId) => {
-    setEvents((prevState) => prevState.filter(({ id }) => id !== eventId));
+    fetchDeleteEvent(eventId).then(() => fetchEventForRender());
   };
 
   return (

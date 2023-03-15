@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Hour from '../hour/Hour';
 import './day.scss';
 
-const Day = ({ dataDay, dayEvents, onDeleteEvent, onCreateEvent }) => {
+const Day = ({ dataDay, dayEvents, onDeleteEvent, onCreateEvent, events }) => {
   const hours = Array(24)
     .fill()
     .map((val, index) => index);
@@ -24,6 +24,7 @@ const Day = ({ dataDay, dayEvents, onDeleteEvent, onCreateEvent }) => {
               hourEvents={hourEvents}
               onDeleteEvent={onDeleteEvent}
               onCreateEvent={onCreateEvent}
+              events={events}
             />
           );
         })}

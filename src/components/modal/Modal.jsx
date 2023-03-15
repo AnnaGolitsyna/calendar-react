@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import './modal.scss';
 import { getArrOfErrorMessages } from './validation';
 import { getFormattedTime, getDateTime } from '../../../src/utils/dateUtils.js';
 
-const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent }) => {
+const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent, events }) => {
   const [{ id, title, description, date, startTime, endTime }, setFormData] =
     useState({
       id: Math.random(),
@@ -31,8 +31,8 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent }) => {
     const dateFrom = getDateTime(date, startTime);
     const dateTo = getDateTime(date, endTime);
 
-    if (getArrOfErrorMessages(dateFrom, dateTo).length) {
-      alert(getArrOfErrorMessages(dateFrom, dateTo));
+    if (getArrOfErrorMessages(dateFrom, dateTo, events).length) {
+      alert(getArrOfErrorMessages(dateFrom, dateTo, events));
     } else {
       onCreateEvent({ id, title, description, dateFrom, dateTo });
     }

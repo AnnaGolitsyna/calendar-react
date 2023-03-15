@@ -23,8 +23,10 @@ export const getDateTime = (date, time) => {
   const [hours, minutes] = time.split(':');
   const withHours = new Date(new Date(date).setHours(Number(hours)));
   const withMinutes = new Date(new Date(withHours).setMinutes(Number(minutes)));
-  return withMinutes;
+  return withMinutes.getTime();
 };
+
+// console.log(getDateTime(new Date('2023, 03, 17'), '10:30'));
 
 export const getFormattedTime = (hours, minutes) => {
   const multiplesOf15Min = Math.floor(minutes / 15) * 15;
@@ -35,6 +37,12 @@ export const getFormattedTime = (hours, minutes) => {
 
 export const formatMins = (mins) => {
   return mins < 10 ? `0${mins}` : mins;
+};
+
+export const getFormattedDateForFetch = (stringDate) => {
+  const objDate = new Date();
+  objDate.setTime(stringDate);
+  return objDate;
 };
 
 export const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
