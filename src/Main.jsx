@@ -13,7 +13,7 @@ import {
   getFormattedDateForFetch,
 } from '../src/utils/dateUtils.js';
 
-import './common.scss';
+import './style/common.scss';
 
 const Main = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
@@ -55,8 +55,8 @@ const Main = () => {
     fetchEventForRender();
   }, []);
 
-  const handleCreateEvents = (data) => {
-    fetchCreateEvent(data).then(() => fetchEventForRender());
+  const handleCreateEvents = (eventData) => {
+    fetchCreateEvent(eventData).then(() => fetchEventForRender());
   };
 
   const handleDeleteEvent = (eventId) => {
