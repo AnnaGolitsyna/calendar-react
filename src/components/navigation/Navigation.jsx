@@ -1,8 +1,8 @@
 import React from 'react';
-import './navigation.scss';
+import PropTypes from 'prop-types';
 import moment from 'moment/moment.js';
-
 import { days } from '../../utils/dateUtils.js';
+import './navigation.scss';
 
 const Navigation = ({ weekDates }) => {
   return (
@@ -41,4 +41,9 @@ const Navigation = ({ weekDates }) => {
   );
 };
 
+Navigation.propTypes = {
+  weekDates: PropTypes.array.isRequired,
+};
+
 export default Navigation;
+

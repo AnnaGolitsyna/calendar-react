@@ -1,8 +1,10 @@
+@import './src/style/variables.scss';
+
 .calendar {
   &__time-scale {
     height: 100%;
     width: 48px;
-    background: ghostwhite;
+    background: $background-accent;
   }
 }
 

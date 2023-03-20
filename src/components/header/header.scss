@@ -16,7 +16,8 @@
   color: $primary-color;
 
   &:hover {
-    box-shadow: $button-hover-color 0 1px 8px 0, $button-hover-color 0 1px 1px -1px, $primary-color 0 1px 5px 0;
+    box-shadow: $button-hover-color 0 1px 8px 0,
+      $button-hover-color 0 1px 1px -1px, $primary-color 0 1px 5px 0;
   }
 
   &__icon {
@@ -25,7 +26,6 @@
 }
 
 .navigation {
-
   &__today-btn {
     margin-left: 32px;
     padding: 0 16px;
@@ -33,12 +33,16 @@
     border: none;
     border-radius: 8px;
     box-shadow: 0 5px 10px -5px rgba($primary-color, 0.2);
-    background: linear-gradient(144deg, #af40ff, #5b42f3 50%, $button-hover-color);
-
+    background: $background-gradient;
     color: #fff;
 
     &:hover {
-      background: linear-gradient(144deg, #af40ff, #5b42f3 10%, $button-hover-color 90%);
+      background: linear-gradient(
+        144deg,
+        #af40ff,
+        #5b42f3 10%,
+        $button-hover-color 90%
+      );
     }
   }
 

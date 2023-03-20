@@ -1,18 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Day from '../day/Day';
-
+import moment from 'moment';
 import './week.scss';
 
 const Week = ({ weekDates, events, onDeleteEvent, onCreateEvent }) => {
-  console.log(events);
   return (
     <div className="calendar__week">
       {weekDates.map((dayStart) => {
-        const dayEnd = new Date(dayStart.getTime()).setHours(
-          dayStart.getHours() + 24
-        );
-
-        //getting all events from the day we will render
+        const dayEnd = moment(dayStart).add(1, 'day').toDate();
         const dayEvents = events.filter(
           (event) => event.dateFrom > dayStart && event.dateTo < dayEnd
         );
@@ -30,6 +26,13 @@ const Week = ({ weekDates, events, onDeleteEvent, onCreateEvent }) => {
       })}
     </div>
   );
+};
+
+Week.propTypes = {
+  weekDates: PropTypes.array.isRequired,
+  events: PropTypes.array.isRequired,
+  onDeleteEvent: PropTypes.func.isRequired,
+  onCreateEvent: PropTypes.func.isRequired,
 };
 
 export default Week;

@@ -39,6 +39,7 @@ export const fetchEventsList = () => {
       if (resp.ok) {
         return resp.json();
       }
+      alert("Internal Server Error. Can't display events")
       throw new Error('Network response was not ok');
     })
     .catch((error) => {
