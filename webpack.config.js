@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const { defaults } = require('jest-config');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
@@ -43,6 +44,7 @@ module.exports = (env, argv) => {
       hot: true,
       port: 8080,
     },
+   
   };
 
   if (isProduction) {
