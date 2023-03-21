@@ -19,10 +19,10 @@ const Event = ({
 
   const [isDeleted, setDelete] = useState(false);
 
-  const isNotDelete = dateFrom - new Date() < 60000 * 15;
+  const isDeletable = dateFrom - new Date() < 60000 * 15;
 
   const handleDeleteEvent = () => {
-    if (isNotDelete) {
+    if (isDeletable) {
       alert("You can't delete this event. To late.");
       return null;
     }
@@ -34,12 +34,14 @@ const Event = ({
     setDelete(false);
   };
 
+
+
   return (
     <>
       <div
         style={eventStyle}
         className="event"
-        dataset={id}
+        dataset-id={id}
         onClick={handleDeleteEvent}
       >
         <div className="event__title">{title}</div>
@@ -47,7 +49,7 @@ const Event = ({
       </div>
       {isDeleted && (
         <DeleteEvent
-          onDelete={() => onDeleteEvent(handleDeleteEvent())}
+          onDelete={() => onDeleteEvent(id)}
           onHide={hideDeleteBtn}
         />
       )}
