@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './deleteEvent.scss';
 
 const DeleteEvent = ({ onDelete, onHide }) => {
@@ -11,6 +12,11 @@ const DeleteEvent = ({ onDelete, onHide }) => {
       </button>
     </div>
   );
+};
+
+DeleteEvent.propTypes = {
+  onDelete: PropTypes.func.isRequired,
+  onHide: PropTypes.func.isRequired,
 };
 
 export default DeleteEvent;

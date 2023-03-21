@@ -46,7 +46,13 @@ export const getArrOfErrorMessages = (dateFrom, dateTo, events) => {
       invalid: checkEventByTime,
       errorText: 'There is already an event at this time',
     },
+    {
+      invalid: moment(dateFrom) < moment(),
+      errorText: "You can't create this event. To late.",
+    },
   ];
+
+
 
   const errorMessages = [];
   validations.forEach(({ invalid, errorText }) => {

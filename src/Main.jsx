@@ -67,6 +67,7 @@ const Main = () => {
     <>
       <Header
         weekDates={weekDates}
+        events={eventsInState}
         onPrevWeek={changePrevtWeek}
         onNextWeek={changeNextWeek}
         onThisWeek={changeThisWeek}

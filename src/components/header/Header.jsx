@@ -6,6 +6,7 @@ import './header.scss';
 
 const Header = ({
   weekDates,
+  events,
   onPrevWeek,
   onNextWeek,
   onThisWeek,
@@ -70,7 +71,8 @@ const Header = ({
       {isShowModal && (
         <Modal
           dateEvent={new Date()}
-          endtTimeEvent={new Date()}
+          endtTimeEvent={new Date().getTime()}
+          events={events}
           onHideForm={hideModal}
           onCreateEvent={onCreateEvent}
         />
@@ -82,6 +84,7 @@ const Header = ({
 
 Header.propType = {
   weekDates: PropTypes.array.isRequired,
+  events: PropTypes.array.isRequired,
   onPrevWeek: PropTypes.func.isRequired,
   onNextWeek: PropTypes.func.isRequired,
   onThisWeek: PropTypes.func.isRequired,

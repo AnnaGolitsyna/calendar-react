@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import './modal.scss';
 import { getArrOfErrorMessages } from './validation';
@@ -11,7 +12,7 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent, events }) =
       title: '',
       description: '',
       date: moment(dateEvent).format('YYYY-MM-DD'),
-      startTime: moment(endTimeEvent).format('HH:mm'),
+      startTime: moment(endTimeEvent).subtract(1, 'hours').format('HH:mm'),
       endTime: moment(endTimeEvent).format('HH:mm'),
     });
 
@@ -35,6 +36,7 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent, events }) =
       alert(getArrOfErrorMessages(dateFrom, dateTo, events));
     } else {
       onCreateEvent({ id, title, description, dateFrom, dateTo });
+      onHideForm();
     }
   };
 
@@ -94,5 +96,17 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent, events }) =
     </div>
   );
 };
+
+Modal.propTypes = {
+  onHideForm: PropTypes.func.isRequired,
+  onCreateEvent: PropTypes.func.isRequired,
+  dateEvent: PropTypes.object.isRequired,
+  endTimeEvent: PropTypes.number,
+  events: PropTypes.array.isRequired,
+};
+
+Modal.defaultProps = {
+  endTimeEvent: moment().milliseconds()
+}
 
 export default Modal;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import DeleteEvent from './deleteEvent/DeleteEvent';
 import './event.scss';
 
@@ -33,7 +34,6 @@ const Event = ({
     setDelete(false);
   };
 
-
   return (
     <>
       <div
@@ -53,6 +53,20 @@ const Event = ({
       )}
     </>
   );
+};
+
+Event.propTypes = {
+  height: PropTypes.number.isRequired,
+  marginTop: PropTypes.number.isRequired,
+  title: PropTypes.string,
+  dateFrom: PropTypes.object.isRequired,
+  time: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  onDeleteEvent: PropTypes.func.isRequired,
+};
+
+Event.defaultProps = {
+  title: '',
 };
 
 export default Event;
