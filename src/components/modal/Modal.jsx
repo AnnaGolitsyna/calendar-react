@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import CreateEventForm from './CreateEventForm';
 import moment from 'moment';
 import './modal.scss';
 import { getArrOfErrorMessages } from './validation';
