@@ -5,7 +5,13 @@ import './modal.scss';
 import { getArrOfErrorMessages } from './validation';
 import { getFormattedTime, getDateTime } from '../../../src/utils/dateUtils.js';
 
-const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent, events }) => {
+const Modal = ({
+  onHideForm,
+  onCreateEvent,
+  dateEvent,
+  endTimeEvent,
+  events,
+}) => {
   const [{ id, title, description, date, startTime, endTime }, setFormData] =
     useState({
       id: Math.random(),
@@ -100,13 +106,14 @@ const Modal = ({ onHideForm, onCreateEvent, dateEvent, endTimeEvent, events }) =
 Modal.propTypes = {
   onHideForm: PropTypes.func.isRequired,
   onCreateEvent: PropTypes.func.isRequired,
-  dateEvent: PropTypes.object.isRequired,
+  dateEvent: PropTypes.object,
   endTimeEvent: PropTypes.number,
   events: PropTypes.array.isRequired,
 };
 
 Modal.defaultProps = {
-  endTimeEvent: moment().milliseconds()
-}
+  dateEvent: moment(),
+  endTimeEvent: moment().add(1, 'hour').valueOf(),
+};
 
 export default Modal;

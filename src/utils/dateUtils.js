@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const getWeekStartDate = (date) => {
   const dateCopy = new Date(date);
   const dayOfWeek = dateCopy.getDay();
@@ -26,7 +28,6 @@ export const getDateTime = (date, time) => {
   return withMinutes.getTime();
 };
 
-// console.log(getDateTime(new Date('2023, 03, 17'), '10:30'));
 
 export const getFormattedTime = (hours, minutes) => {
   const multiplesOf15Min = Math.floor(minutes / 15) * 15;
@@ -45,18 +46,10 @@ export const getFormattedDateForFetch = (stringDate) => {
   return objDate;
 };
 
+export const getEndEventTimeInMs = (eventTime, prevDate) => {
+  const newDate = moment(prevDate);
+  return moment(newDate).add(+eventTime, 'hour').valueOf();
+};
+
 export const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-// export const months = [
-//   'January',
-//   'February',
-//   'March',
-//   'April',
-//   'May',
-//   'June',
-//   'July',
-//   'August',
-//   'September',
-//   'October',
-//   'November',
-//   'December',
-// ];
+

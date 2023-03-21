@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Event from '../event/Event';
 import Modal from '../modal/Modal';
@@ -6,7 +6,10 @@ import CurrentTime from '../currentTime/CurrentTime';
 import moment from 'moment';
 import './hour.scss';
 
-import { formatMins } from '../../../src/utils/dateUtils.js';
+import {
+  formatMins,
+  getEndEventTimeInMs,
+} from '../../../src/utils/dateUtils.js';
 
 const Hour = ({
   dataHour,
@@ -14,7 +17,7 @@ const Hour = ({
   hourEvents,
   onDeleteEvent,
   onCreateEvent,
-  events
+  events,
 }) => {
   const [isShowModal, setStatusModal] = useState(false);
   const [endEventTime, setEndEventTime] = useState(dataDay);
@@ -24,20 +27,14 @@ const Hour = ({
       return;
     }
     setStatusModal(true);
-    setEndEventTime((prevState) => {
-      const newDate = new Date(prevState);
-      const msInHour = 3600000;
-      return newDate.setTime(
-        dataDay.getTime() + (e.target.dataset.time) * msInHour
-      );
-    });
+    setEndEventTime((prevState) =>
+      getEndEventTimeInMs(e.target.dataset.time, prevState)
+    );
   };
-
 
   const hideModul = () => {
     setStatusModal(false);
   };
-
 
   return (
     <>
@@ -46,21 +43,22 @@ const Hour = ({
         data-time={dataHour + 1}
         onClick={showModal}
       >
-        {/* if no events in the current hour nothing will render here */}
         {hourEvents.map(({ id, dateFrom, dateTo, title }) => {
-          const eventStart = `${dateFrom.getHours()}:${formatMins(
-            dateFrom.getMinutes()
+          const eventStart = `${moment(dateFrom).hour()}:${formatMins(
+            moment(dateFrom).minute()
           )}`;
-          const eventEnd = `${dateTo.getHours()}:${formatMins(
-            dateTo.getMinutes()
+          const eventEnd = `${moment(dateTo).hour()}:${formatMins(
+            moment(dateTo).minute()
           )}`;
 
           return (
             <Event
               key={id}
-              //calculating event height = duration of event in minutes
-              height={(dateTo.getTime() - dateFrom.getTime()) / (1000 * 60)}
-              marginTop={dateFrom.getMinutes()}
+              height={
+                (moment(dateTo).valueOf() - moment(dateFrom).valueOf()) /
+                (1000 * 60)
+              }
+              marginTop={moment(dateFrom).minute()}
               dateFrom={dateFrom}
               time={`${eventStart} - ${eventEnd}`}
               title={title}

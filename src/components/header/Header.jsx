@@ -70,8 +70,6 @@ const Header = ({
       </header>
       {isShowModal && (
         <Modal
-          dateEvent={new Date()}
-          endtTimeEvent={new Date().getTime()}
           events={events}
           onHideForm={hideModal}
           onCreateEvent={onCreateEvent}
@@ -80,7 +78,6 @@ const Header = ({
     </>
   );
 };
-
 
 Header.propType = {
   weekDates: PropTypes.array.isRequired,

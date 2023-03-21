@@ -20,7 +20,8 @@ const CurrentTime = ({ dataDay, dataHour }) => {
     moment(dataDay).format('L') === moment(currentTime).format('L') &&
     dataHour === moment(currentTime).hour();
 
-  const currentMinute = moment(currentTime).minute(); 
+  const currentMinute = moment(currentTime).minute();
+  
   if (!isCurrentTime) {
     return null;
   }
