@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import Hour from '../hour/Hour';
 import './day.scss';
@@ -10,11 +11,11 @@ const Day = ({ dataDay, dayEvents, onDeleteEvent, onCreateEvent, events }) => {
 
   return (
     <>
-      <div className="calendar__day" data-day={dataDay.getDate()}>
+      <div className="calendar__day" data-day={moment(dataDay).date()}>
         {hours.map((hour) => {
 
           const hourEvents = dayEvents.filter(
-            (event) => event.dateFrom.getHours() === hour
+            (event) => moment(event.dateFrom).hour() === hour
           );
 
           return (
