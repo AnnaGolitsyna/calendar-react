@@ -34,8 +34,6 @@ const Event = ({
     setDelete(false);
   };
 
-
-
   return (
     <>
       <div
