@@ -15,7 +15,7 @@ const Week = ({ weekDates, events, onDeleteEvent, onCreateEvent }) => {
 
         return (
           <Day
-            key={dayStart.getDate()}
+            key={moment(dayStart).date()}
             dataDay={dayStart}
             dayEvents={dayEvents}
             onDeleteEvent={onDeleteEvent}
