@@ -1,33 +1,38 @@
-import moment from "moment";
+import moment from 'moment';
 
 export const getWeekStartDate = (date) => {
-  const dateCopy = new Date(date);
-  const dayOfWeek = dateCopy.getDay();
+  const dateCopy = moment(date);
+  const dayOfWeek = moment(dateCopy).day();
   const difference =
     dayOfWeek === 0
       ? -6 // for Sunday
       : 1 - dayOfWeek;
 
-  const monday = new Date(dateCopy.setDate(date.getDate() + difference));
-  return new Date(monday.getFullYear(), monday.getMonth(), monday.getDate());
+  const monday = moment(
+    moment(dateCopy).date(moment(date).date() + difference)
+  );
+  return new Date(
+    moment(monday).year(),
+    moment(monday).month(),
+    moment(monday).date()
+  );
 };
 
 export const generateWeekRange = (startDate) => {
   const result = [];
   for (let i = 0; i < 7; i += 1) {
-    const base = new Date(startDate);
-    result.push(new Date(base.setDate(base.getDate() + i)));
+    const base = moment(startDate);
+    result.push(new Date(moment(base).date(moment(base).date() + i)));
   }
   return result;
 };
 
 export const getDateTime = (date, time) => {
   const [hours, minutes] = time.split(':');
-  const withHours = new Date(new Date(date).setHours(Number(hours)));
-  const withMinutes = new Date(new Date(withHours).setMinutes(Number(minutes)));
-  return withMinutes.getTime();
+  const withHours = new Date(moment(date).hours(Number(hours)));
+  const withMinutes = new Date(moment(withHours).minutes(Number(minutes)));
+  return moment(withMinutes).valueOf();
 };
-
 
 export const getFormattedTime = (hours, minutes) => {
   const multiplesOf15Min = Math.floor(minutes / 15) * 15;
@@ -35,12 +40,11 @@ export const getFormattedTime = (hours, minutes) => {
   return `${hours}:${formattedMin}`;
 };
 
-
 export const formatMins = (mins) => {
   return mins < 10 ? `0${mins}` : mins;
 };
 
-export const getFormattedDateForFetch = (stringDate) => {
+export const getFormattedDateAfterFetch = (stringDate) => {
   const objDate = new Date();
   objDate.setTime(stringDate);
   return objDate;
@@ -52,4 +56,3 @@ export const getEndEventTimeInMs = (eventTime, prevDate) => {
 };
 
 export const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-

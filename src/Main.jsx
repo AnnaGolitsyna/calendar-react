@@ -10,7 +10,7 @@ import {
 import {
   getWeekStartDate,
   generateWeekRange,
-  getFormattedDateForFetch,
+  getFormattedDateAfterFetch,
 } from '../src/utils/dateUtils.js';
 
 import './style/common.scss';
@@ -43,8 +43,8 @@ const Main = () => {
       const eventsData = data.map(({ dateFrom, dateTo, ...rest }) => {
         return {
           ...rest,
-          dateFrom: getFormattedDateForFetch(dateFrom),
-          dateTo: getFormattedDateForFetch(dateTo),
+          dateFrom: getFormattedDateAfterFetch(dateFrom),
+          dateTo: getFormattedDateAfterFetch(dateTo),
         };
       });
       setEvents(eventsData);
