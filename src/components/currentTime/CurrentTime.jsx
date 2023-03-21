@@ -4,7 +4,7 @@ import moment from 'moment';
 import './currentTime.scss';
 
 const CurrentTime = ({ dataDay, dataHour }) => {
-  
+
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -18,10 +18,9 @@ const CurrentTime = ({ dataDay, dataHour }) => {
 
   const isCurrentTime =
     moment(dataDay).format('L') === moment(currentTime).format('L') &&
-    dataHour === currentTime.getHours();
+    dataHour === moment(currentTime).hour();
 
-  const currentMinute = currentTime.getMinutes();
-
+  const currentMinute = moment(currentTime).minute(); 
   if (!isCurrentTime) {
     return null;
   }
