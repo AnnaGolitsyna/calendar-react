@@ -14,7 +14,7 @@ const Navigation = ({ weekDates }) => {
         return (
           <div
             className="calendar__day-label day-label"
-            key={dayDate.getTime()}
+            key={moment(dayDate).valueOf()}
           >
             <span
               className={
@@ -23,7 +23,7 @@ const Navigation = ({ weekDates }) => {
                   : 'day-label__day-name'
               }
             >
-              {days[dayDate.getDay()]}
+              {days[moment(dayDate).day()]}
             </span>
             <span
               className={
@@ -32,7 +32,7 @@ const Navigation = ({ weekDates }) => {
                   : 'day-label__day-number'
               }
             >
-              {dayDate.getDate()}
+              {moment(dayDate).date()}
             </span>
           </div>
         );
