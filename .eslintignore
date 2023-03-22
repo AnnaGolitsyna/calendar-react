@@ -1,7 +1,7 @@
 review_build
 node_modules
+package-lock.json
 dist
 build
 temp
 tmp
-package-lock.json

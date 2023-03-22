@@ -44,7 +44,6 @@ module.exports = (env, argv) => {
       hot: true,
       port: 8080,
     },
-   
   };
 
   if (isProduction) {
