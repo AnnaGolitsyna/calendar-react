@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import EventForm from './EventForm';
 import useModalState from '../../../src/hook/useModalState';
 import moment from 'moment';
 import './modal.scss';
-import { getArrOfErrorMessages } from './validation';
+import { getArrOfErrorMessages } from '../../../src/utils/validation.js';
 import { getDateTime } from '../../../src/utils/dateUtils.js';
 
 const Modal = ({

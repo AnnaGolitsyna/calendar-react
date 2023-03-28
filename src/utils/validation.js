@@ -1,5 +1,5 @@
 import moment from 'moment';
-// import events from '../../gateway/events';
+
 
 const hours = Array(24)
   .fill()
