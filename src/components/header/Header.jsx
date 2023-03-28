@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import Modal from '../modal/Modal';
+
 import './header.scss';
 
-const Header = ({
-  weekDates,
-  events,
-  onPrevWeek,
-  onNextWeek,
-  onThisWeek,
-  onCreateEvent,
-}) => {
-  const [isShowModal, setStatusModal] = useState(false);
+const Header = ({ weekDates, startDate, setWeekStartDate, showModal }) => {
 
-  const showModal = () => {
-    setStatusModal(true);
+  const changePrevtWeek = () => {
+    let newStartDay = moment(startDate);
+    setWeekStartDate(moment(newStartDay).subtract(7, 'days'));
   };
 
-  const hideModal = () => {
-    setStatusModal(false);
+  const changeNextWeek = () => {
+    let newStartDay = moment(startDate);
+    setWeekStartDate(moment(newStartDay).add(7, 'days'));
+  };
+
+  const changeThisWeek = () => {
+    setWeekStartDate(moment());
   };
 
   const displayedMonths = weekDates.reduce((acc, month) => {
@@ -30,62 +28,50 @@ const Header = ({
     return acc;
   }, []);
 
+  const isOneMonth = displayedMonths.length === 1;
+
   return (
-    <>
-      <header className="header">
-        <button className="button create-event-btn" onClick={showModal}>
-          <i className="fas fa-plus create-event-btn__icon"></i>Create
+    <header className="header">
+      <button
+        className="button create-event-btn"
+        onClick={() => showModal(true)}
+      >
+        <i className="fas fa-plus create-event-btn__icon"></i>Create
+      </button>
+      <div className="navigation">
+        <button
+          className="navigation__today-btn button"
+          onClick={changeThisWeek}
+        >
+          Today
         </button>
-        <div className="navigation">
-          <button
-            className="navigation__today-btn button"
-            onClick={() => {
-              onThisWeek();
-            }}
-          >
-            Today
-          </button>
-          <button
-            className="icon-button navigation__nav-icon"
-            onClick={() => {
-              onPrevWeek();
-            }}
-          >
-            <i className="fas fa-chevron-left"></i>
-          </button>
-          <button
-            className="icon-button navigation__nav-icon"
-            onClick={() => {
-              onNextWeek();
-            }}
-          >
-            <i className="fas fa-chevron-right"></i>
-          </button>
-          <span className="navigation__displayed-month">
-            {displayedMonths.length === 1
-              ? displayedMonths
-              : `${displayedMonths[0]} - ${displayedMonths[1]}`}
-          </span>
-        </div>
-      </header>
-      {isShowModal && (
-        <Modal
-          events={events}
-          onHideForm={hideModal}
-          onCreateEvent={onCreateEvent}
-        />
-      )}
-    </>
+        <button
+          className="icon-button navigation__nav-icon"
+          onClick={changePrevtWeek}
+        >
+          <i className="fas fa-chevron-left"></i>
+        </button>
+        <button
+          className="icon-button navigation__nav-icon"
+          onClick={changeNextWeek}
+        >
+          <i className="fas fa-chevron-right"></i>
+        </button>
+        <span className="navigation__displayed-month">
+          {isOneMonth
+            ? displayedMonths
+            : `${displayedMonths[0]} - ${displayedMonths[1]}`}
+        </span>
+      </div>
+    </header>
   );
 };
 
 Header.propType = {
   weekDates: PropTypes.array.isRequired,
-  events: PropTypes.array.isRequired,
-  onPrevWeek: PropTypes.func.isRequired,
-  onNextWeek: PropTypes.func.isRequired,
-  onThisWeek: PropTypes.func.isRequired,
-  onCreateEvent: PropTypes.func.isRequired,
+  startDate: PropTypes.object.isRequired,
+  setWeekStartDate: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 
 export default Header;

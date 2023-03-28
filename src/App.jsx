@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/header/Header.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
+import Modal from './components/modal/Modal';
 import {
   fetchEventsList,
   fetchCreateEvent,
@@ -17,26 +18,12 @@ import './style/common.scss';
 
 const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
+  const [isShowModal, setStatusModal] = useState(false);
   const [eventsInState, setEvents] = useState([]);
+
 
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
 
-  const changePrevtWeek = () => {
-    let newStartDay = new Date();
-    newStartDay.setTime(weekStartDate.getTime() - 86400000 * 7);
-    setWeekStartDate(newStartDay);
-  };
-
-  const changeNextWeek = () => {
-    let newStartDay = new Date();
-    newStartDay.setTime(weekStartDate.getTime() + 86400000 * 7);
-    setWeekStartDate(newStartDay);
-  };
-
-  const changeThisWeek = () => {
-    const newStartDay = new Date();
-    setWeekStartDate(newStartDay);
-  };
 
   const fetchEventForRender = () => {
     fetchEventsList().then((data) => {
@@ -63,15 +50,19 @@ const App = () => {
     fetchDeleteEvent(eventId).then(() => fetchEventForRender());
   };
 
+
+  const hideModal = () => {
+    setStatusModal(false);
+  };
+
   return (
     <>
       <Header
         weekDates={weekDates}
-        events={eventsInState}
-        onPrevWeek={changePrevtWeek}
-        onNextWeek={changeNextWeek}
-        onThisWeek={changeThisWeek}
-        onCreateEvent={handleCreateEvents}
+        startDate={weekStartDate}
+        showModal={setStatusModal}
+        setWeekStartDate={setWeekStartDate}
+
       />
       <Calendar
         weekDates={weekDates}
@@ -79,10 +70,15 @@ const App = () => {
         onCreateEvent={handleCreateEvents}
         onDeleteEvent={handleDeleteEvent}
       />
+      {isShowModal && (
+        <Modal
+          events={eventsInState}
+          onHideForm={hideModal}
+          onCreateEvent={handleCreateEvents}
+        />
+      )}
     </>
   );
 };
-
-
 
 export default App;
