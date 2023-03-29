@@ -5,11 +5,11 @@ import './currentTime.scss';
 
 const CurrentTime = ({ dataDay, dataHour }) => {
 
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(moment());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime(new Date());
+      setCurrentTime(moment());
     }, 1000 * 60);
     return () => {
       clearInterval(interval);
@@ -21,7 +21,7 @@ const CurrentTime = ({ dataDay, dataHour }) => {
     dataHour === moment(currentTime).hour();
 
   const currentMinute = moment(currentTime).minute();
-  
+
   if (!isCurrentTime) {
     return null;
   }

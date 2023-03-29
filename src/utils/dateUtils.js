@@ -44,11 +44,6 @@ export const formatMins = (mins) => {
   return mins < 10 ? `0${mins}` : mins;
 };
 
-export const getFormattedDateAfterFetch = (stringDate) => {
-  const objDate = new Date();
-  objDate.setTime(stringDate);
-  return objDate;
-};
 
 export const getEndEventTimeInMs = (eventTime, prevDate) => {
   const newDate = moment(prevDate);

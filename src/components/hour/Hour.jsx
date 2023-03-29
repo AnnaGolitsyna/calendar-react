@@ -15,18 +15,19 @@ const Hour = ({
   dataHour,
   dataDay,
   hourEvents,
+  showModal,
   onDeleteEvent,
   onCreateEvent,
   events,
 }) => {
-  const [isShowModal, setStatusModal] = useState(false);
+  // const [isShowModal, setStatusModal] = useState(false);
   const [endEventTime, setEndEventTime] = useState(dataDay);
 
-  const showModal = (e) => {
+  const handleShowModal = (e) => {
     if (hourEvents.length) {
       return;
     }
-    setStatusModal(true);
+    showModal(true);
     setEndEventTime((prevState) =>
       getEndEventTimeInMs(e.target.dataset.time, prevState)
     );
@@ -41,7 +42,7 @@ const Hour = ({
       <div
         className="calendar__time-slot"
         data-time={dataHour + 1}
-        onClick={showModal}
+        onClick={handleShowModal}
       >
         {hourEvents.map(({ id, dateFrom, dateTo, title }) => {
           const eventStart = `${moment(dateFrom).hour()}:${formatMins(
@@ -69,15 +70,16 @@ const Hour = ({
         })}
         {<CurrentTime dataDay={dataDay} dataHour={dataHour} />}
       </div>
-      {isShowModal && (
+      {/* {isShowModal && (
         <Modal
           dateEvent={dataDay}
           endTimeEvent={endEventTime}
+          
           onHideForm={hideModul}
           onCreateEvent={onCreateEvent}
           events={events}
         />
-      )}
+      )} */}
     </>
   );
 };
@@ -86,6 +88,7 @@ Hour.propTypes = {
   dataHour: PropTypes.number.isRequired,
   dataDay: PropTypes.object.isRequired,
   hourEvents: PropTypes.array.isRequired,
+  showModal: PropTypes.func.isRequired,
   onDeleteEvent: PropTypes.func.isRequired,
   onCreateEvent: PropTypes.func.isRequired,
   events: PropTypes.array.isRequired,

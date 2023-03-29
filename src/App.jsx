@@ -10,11 +10,12 @@ import {
 
 import {
   getWeekStartDate,
-  generateWeekRange,
-  getFormattedDateAfterFetch,
+  generateWeekRange
+
 } from '../src/utils/dateUtils.js';
 
 import './style/common.scss';
+import moment from 'moment';
 
 const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
@@ -30,8 +31,8 @@ const App = () => {
       const eventsData = data.map(({ dateFrom, dateTo, ...rest }) => {
         return {
           ...rest,
-          dateFrom: getFormattedDateAfterFetch(dateFrom),
-          dateTo: getFormattedDateAfterFetch(dateTo),
+          dateFrom: moment(dateFrom),
+          dateTo: moment(dateTo),
         };
       });
       setEvents(eventsData);
@@ -62,11 +63,11 @@ const App = () => {
         startDate={weekStartDate}
         showModal={setStatusModal}
         setWeekStartDate={setWeekStartDate}
-
       />
       <Calendar
         weekDates={weekDates}
         events={eventsInState}
+        showModal={setStatusModal}
         onCreateEvent={handleCreateEvents}
         onDeleteEvent={handleDeleteEvent}
       />
