@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Event from '../event/Event';
 import CurrentTime from '../currentTime/CurrentTime';
-import moment from 'moment';
 import './hour.scss';
 
 import {
@@ -10,12 +10,18 @@ import {
   getEndEventTimeInMs,
 } from '../../../src/utils/dateUtils.js';
 
-const Hour = ({ dataHour, dataDay, hourEvents, showModal, onDeleteEvent }) => {
+const Hour = ({
+  dataHour,
+  dataDay,
+  hourEvents,
+  getDataModal,
+  onDeleteEvent,
+}) => {
   const handleShowModal = (e) => {
     if (hourEvents.length) {
       return;
     }
-    showModal({
+    getDataModal({
       status: true,
       dateEvent: dataDay,
       endTimeEvent: getEndEventTimeInMs(e.target.dataset.time, dataDay),
@@ -63,7 +69,7 @@ Hour.propTypes = {
   dataHour: PropTypes.number.isRequired,
   dataDay: PropTypes.object.isRequired,
   hourEvents: PropTypes.array.isRequired,
-  showModal: PropTypes.func.isRequired,
+  getDataModal: PropTypes.func.isRequired,
   onDeleteEvent: PropTypes.func.isRequired,
 };
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import moment from 'moment';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Hour from '../hour/Hour';
 import './day.scss';
 
-const Day = ({ dataDay, dayEvents, showModal, onDeleteEvent }) => {
+const Day = ({ dataDay, dayEvents, getDataModal, onDeleteEvent }) => {
   const hours = Array(24)
     .fill()
     .map((val, index) => index);
@@ -23,7 +23,7 @@ const Day = ({ dataDay, dayEvents, showModal, onDeleteEvent }) => {
               dataDay={dataDay}
               dataHour={hour}
               hourEvents={hourEvents}
-              showModal={showModal}
+              getDataModal={getDataModal}
               onDeleteEvent={onDeleteEvent}
             />
           );
@@ -36,7 +36,7 @@ const Day = ({ dataDay, dayEvents, showModal, onDeleteEvent }) => {
 Day.propTypes = {
   dataDay: PropTypes.object.isRequired,
   dayEvents: PropTypes.array.isRequired,
-  showModal: PropTypes.func.isRequired,
+  getDataModal: PropTypes.func.isRequired,
   onDeleteEvent: PropTypes.func.isRequired,
 };
 

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-
 import './header.scss';
 
-const Header = ({ weekDates, startDate, setWeekStartDate, showModal }) => {
+const Header = ({ weekDates, startDate, setWeekStartDate, getDataModal }) => {
   const changePrevtWeek = () => {
     let newStartDay = moment(startDate);
     setWeekStartDate(moment(newStartDay).subtract(7, 'days'));
@@ -33,8 +32,8 @@ const Header = ({ weekDates, startDate, setWeekStartDate, showModal }) => {
     <header className="header">
       <button
         className="button create-event-btn"
-        onClick={(e) => {
-          showModal({
+        onClick={() => {
+          getDataModal({
             status: true,
           });
         }}
@@ -74,7 +73,7 @@ Header.propType = {
   weekDates: PropTypes.array.isRequired,
   startDate: PropTypes.object.isRequired,
   setWeekStartDate: PropTypes.func.isRequired,
-  showModal: PropTypes.func.isRequired,
+  getDataModal: PropTypes.func.isRequired,
 };
 
 export default Header;

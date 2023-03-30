@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import Header from './components/header/Header.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
 import Modal from './components/modal/Modal';
+import './style/common.scss';
+
 import {
   fetchEventsList,
   fetchCreateEvent,
   fetchDeleteEvent,
 } from './gateway/events.js';
-
 import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
 
-import './style/common.scss';
-import moment from 'moment';
 
 const App = () => {
+  
   const [weekStartDate, setWeekStartDate] = useState(new Date());
   const [dataModal, setDataModal] = useState({
     status: false,
@@ -53,22 +54,18 @@ const App = () => {
     });
   };
 
-  const getDateAndEndTime = (dateEvent) => {
-    setDataModal(dateEvent);
-  };
-
   return (
     <>
       <Header
         weekDates={weekDates}
         startDate={weekStartDate}
-        showModal={getDateAndEndTime}
+        getDataModal={setDataModal}
         setWeekStartDate={setWeekStartDate}
       />
       <Calendar
         weekDates={weekDates}
         events={eventsInState}
-        showModal={getDateAndEndTime}
+        getDataModal={setDataModal}
         onDeleteEvent={handleDeleteEvent}
       />
       {dataModal.status && (

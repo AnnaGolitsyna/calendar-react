@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Day from '../day/Day';
 import moment from 'moment';
+import Day from '../day/Day';
 import './week.scss';
 
-const Week = ({ weekDates, events, showModal, onDeleteEvent }) => {
+const Week = ({ weekDates, events, getDataModal, onDeleteEvent }) => {
   return (
     <div className="calendar__week">
       {weekDates.map((dayStart) => {
@@ -18,7 +18,7 @@ const Week = ({ weekDates, events, showModal, onDeleteEvent }) => {
             key={moment(dayStart).date()}
             dataDay={dayStart}
             dayEvents={dayEvents}
-            showModal={showModal}
+            getDataModal={getDataModal}
             onDeleteEvent={onDeleteEvent}
             events={events}
           />
@@ -31,7 +31,7 @@ const Week = ({ weekDates, events, showModal, onDeleteEvent }) => {
 Week.propTypes = {
   weekDates: PropTypes.array.isRequired,
   events: PropTypes.array.isRequired,
-  showModal: PropTypes.func.isRequired,
+  getDataModal: PropTypes.func.isRequired,
   onDeleteEvent: PropTypes.func.isRequired,
 };
 
