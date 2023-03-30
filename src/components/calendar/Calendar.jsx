@@ -5,12 +5,9 @@ import Week from '../week/Week';
 import Sidebar from '../sidebar/Sidebar';
 import './calendar.scss';
 
-const Calendar = ({ weekDates, events, showModal, onDeleteEvent, onCreateEvent }) => {
+const Calendar = ({ weekDates, events, showModal, onDeleteEvent }) => {
   return (
-    <section
-      className="calendar"
-      
-    >
+    <section className="calendar">
       <Navigation weekDates={weekDates} />
       <div className="calendar__body">
         <div className="calendar__week-container">
@@ -20,7 +17,6 @@ const Calendar = ({ weekDates, events, showModal, onDeleteEvent, onCreateEvent }
             events={events}
             showModal={showModal}
             onDeleteEvent={onDeleteEvent}
-            onCreateEvent={onCreateEvent}
           />
         </div>
       </div>
@@ -33,7 +29,6 @@ Calendar.propTypes = {
   events: PropTypes.array.isRequired,
   showModal: PropTypes.func.isRequired,
   onDeleteEvent: PropTypes.func.isRequired,
-  onCreateEvent: PropTypes.func.isRequired,
 };
 
 export default Calendar;

@@ -14,6 +14,8 @@ const Modal = ({
   endTimeEvent,
   events,
 }) => {
+  
+  console.log(dateEvent, endTimeEvent);
   const [modalState, handleChange] = useModalState(dateEvent, endTimeEvent);
 
   const handleSubmit = (event) => {

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Event from '../event/Event';
-import Modal from '../modal/Modal';
 import CurrentTime from '../currentTime/CurrentTime';
 import moment from 'moment';
 import './hour.scss';
@@ -11,31 +10,18 @@ import {
   getEndEventTimeInMs,
 } from '../../../src/utils/dateUtils.js';
 
-const Hour = ({
-  dataHour,
-  dataDay,
-  hourEvents,
-  showModal,
-  onDeleteEvent,
-  onCreateEvent,
-  events,
-}) => {
-  // const [isShowModal, setStatusModal] = useState(false);
-  const [endEventTime, setEndEventTime] = useState(dataDay);
+const Hour = ({ dataHour, dataDay, hourEvents, showModal, onDeleteEvent }) => {
 
-  const handleShowModal = (e) => {
-    if (hourEvents.length) {
-      return;
-    }
-    showModal(true);
-    setEndEventTime((prevState) =>
-      getEndEventTimeInMs(e.target.dataset.time, prevState)
-    );
-  };
-
-  const hideModul = () => {
-    setStatusModal(false);
-  };
+  const handleShowModal = e => {
+  console.log(dataDay, e.target.dataset.time);
+  if (hourEvents.length) {
+    return;
+  }
+  showModal({
+    dateEvent: dataDay,
+    endTimeEvent: getEndEventTimeInMs(e.target.dataset.time, dataDay),
+  });
+}
 
   return (
     <>
@@ -70,16 +56,6 @@ const Hour = ({
         })}
         {<CurrentTime dataDay={dataDay} dataHour={dataHour} />}
       </div>
-      {/* {isShowModal && (
-        <Modal
-          dateEvent={dataDay}
-          endTimeEvent={endEventTime}
-          
-          onHideForm={hideModul}
-          onCreateEvent={onCreateEvent}
-          events={events}
-        />
-      )} */}
     </>
   );
 };
@@ -90,8 +66,6 @@ Hour.propTypes = {
   hourEvents: PropTypes.array.isRequired,
   showModal: PropTypes.func.isRequired,
   onDeleteEvent: PropTypes.func.isRequired,
-  onCreateEvent: PropTypes.func.isRequired,
-  events: PropTypes.array.isRequired,
 };
 
 export default Hour;

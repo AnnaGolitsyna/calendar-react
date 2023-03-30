@@ -5,7 +5,6 @@ import moment from 'moment';
 import './header.scss';
 
 const Header = ({ weekDates, startDate, setWeekStartDate, showModal }) => {
-
   const changePrevtWeek = () => {
     let newStartDay = moment(startDate);
     setWeekStartDate(moment(newStartDay).subtract(7, 'days'));
@@ -34,7 +33,13 @@ const Header = ({ weekDates, startDate, setWeekStartDate, showModal }) => {
     <header className="header">
       <button
         className="button create-event-btn"
-        onClick={() => showModal(true)}
+        onClick={(e) => {
+          console.log(e.target);
+          showModal({
+            dateEvent: moment(),
+            endTimeEvent: moment().add(1, 'hour').valueOf(),
+          });
+        }}
       >
         <i className="fas fa-plus create-event-btn__icon"></i>Create
       </button>

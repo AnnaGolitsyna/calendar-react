@@ -8,11 +8,7 @@ import {
   fetchDeleteEvent,
 } from './gateway/events.js';
 
-import {
-  getWeekStartDate,
-  generateWeekRange
-
-} from '../src/utils/dateUtils.js';
+import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
 
 import './style/common.scss';
 import moment from 'moment';
@@ -21,10 +17,14 @@ const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
   const [isShowModal, setStatusModal] = useState(false);
   const [eventsInState, setEvents] = useState([]);
+  const [dataModal, setDataModal] = useState({
 
+    dateEvent: moment(),
+    endTimeEvent: moment().add(1, 'hour').valueOf(),
+  });
 
+  console.log(dataModal);
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
-
 
   const fetchEventForRender = () => {
     fetchEventsList().then((data) => {
@@ -51,9 +51,19 @@ const App = () => {
     fetchDeleteEvent(eventId).then(() => fetchEventForRender());
   };
 
-
   const hideModal = () => {
     setStatusModal(false);
+    setDataModal({
+      dateEvent: moment(),
+      endTimeEvent: moment().add(1, 'hour').valueOf(),
+    });
+  };
+
+  const getDateAndEndTime = (dateEvent) => {
+    setStatusModal(true);
+    console.log(dateEvent);
+    setDataModal(dateEvent);
+
   };
 
   return (
@@ -61,14 +71,13 @@ const App = () => {
       <Header
         weekDates={weekDates}
         startDate={weekStartDate}
-        showModal={setStatusModal}
+        showModal={getDateAndEndTime}
         setWeekStartDate={setWeekStartDate}
       />
       <Calendar
         weekDates={weekDates}
         events={eventsInState}
-        showModal={setStatusModal}
-        onCreateEvent={handleCreateEvents}
+        showModal={getDateAndEndTime}
         onDeleteEvent={handleDeleteEvent}
       />
       {isShowModal && (
@@ -76,6 +85,7 @@ const App = () => {
           events={eventsInState}
           onHideForm={hideModal}
           onCreateEvent={handleCreateEvents}
+          {...dataModal}
         />
       )}
     </>

@@ -4,12 +4,9 @@ import Day from '../day/Day';
 import moment from 'moment';
 import './week.scss';
 
-const Week = ({ weekDates, events, showModal, onDeleteEvent, onCreateEvent }) => {
+const Week = ({ weekDates, events, showModal, onDeleteEvent }) => {
   return (
-    <div
-      className="calendar__week"
-      
-    >
+    <div className="calendar__week">
       {weekDates.map((dayStart) => {
         const dayEnd = moment(dayStart).add(1, 'day').toDate();
         const dayEvents = events.filter(
@@ -23,7 +20,6 @@ const Week = ({ weekDates, events, showModal, onDeleteEvent, onCreateEvent }) =>
             dayEvents={dayEvents}
             showModal={showModal}
             onDeleteEvent={onDeleteEvent}
-            onCreateEvent={onCreateEvent}
             events={events}
           />
         );
@@ -37,7 +33,6 @@ Week.propTypes = {
   events: PropTypes.array.isRequired,
   showModal: PropTypes.func.isRequired,
   onDeleteEvent: PropTypes.func.isRequired,
-  onCreateEvent: PropTypes.func.isRequired,
 };
 
 export default Week;
