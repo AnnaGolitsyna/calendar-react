@@ -11,17 +11,16 @@ import {
 } from '../../../src/utils/dateUtils.js';
 
 const Hour = ({ dataHour, dataDay, hourEvents, showModal, onDeleteEvent }) => {
-
-  const handleShowModal = e => {
-  console.log(dataDay, e.target.dataset.time);
-  if (hourEvents.length) {
-    return;
-  }
-  showModal({
-    dateEvent: dataDay,
-    endTimeEvent: getEndEventTimeInMs(e.target.dataset.time, dataDay),
-  });
-}
+  const handleShowModal = (e) => {
+    if (hourEvents.length) {
+      return;
+    }
+    showModal({
+      status: true,
+      dateEvent: dataDay,
+      endTimeEvent: getEndEventTimeInMs(e.target.dataset.time, dataDay),
+    });
+  };
 
   return (
     <>

@@ -15,15 +15,11 @@ import moment from 'moment';
 
 const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
-  const [isShowModal, setStatusModal] = useState(false);
-  const [eventsInState, setEvents] = useState([]);
   const [dataModal, setDataModal] = useState({
-
-    dateEvent: moment(),
-    endTimeEvent: moment().add(1, 'hour').valueOf(),
+    status: false,
   });
+  const [eventsInState, setEvents] = useState([]);
 
-  console.log(dataModal);
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
 
   const fetchEventForRender = () => {
@@ -52,18 +48,13 @@ const App = () => {
   };
 
   const hideModal = () => {
-    setStatusModal(false);
     setDataModal({
-      dateEvent: moment(),
-      endTimeEvent: moment().add(1, 'hour').valueOf(),
+      status: false,
     });
   };
 
   const getDateAndEndTime = (dateEvent) => {
-    setStatusModal(true);
-    console.log(dateEvent);
     setDataModal(dateEvent);
-
   };
 
   return (
@@ -80,7 +71,7 @@ const App = () => {
         showModal={getDateAndEndTime}
         onDeleteEvent={handleDeleteEvent}
       />
-      {isShowModal && (
+      {dataModal.status && (
         <Modal
           events={eventsInState}
           onHideForm={hideModal}

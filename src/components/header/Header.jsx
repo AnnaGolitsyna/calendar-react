@@ -34,10 +34,8 @@ const Header = ({ weekDates, startDate, setWeekStartDate, showModal }) => {
       <button
         className="button create-event-btn"
         onClick={(e) => {
-          console.log(e.target);
           showModal({
-            dateEvent: moment(),
-            endTimeEvent: moment().add(1, 'hour').valueOf(),
+            status: true,
           });
         }}
       >
